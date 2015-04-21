@@ -1,0 +1,92 @@
+// ----------------------------------------------------------------------
+//  Francisco Rocha, CMPS 101 Fall 14
+//  Sparse.java
+//  Matrix calulator for sparce matricies
+//  
+// -----------------------------------------------------------------------
+import java.io.*;
+import java.util.Scanner;
+
+public class Sparse {
+  public static void main(String[] args) throws IOException{
+    Scanner in = null;
+    PrintWriter out = null;
+    String line = null;
+    String[] token = null;
+    int size = 0;
+    int a = 0; // size of first matrix
+    int b = 0; // size of second
+    Matrix one;
+    Matrix two;
+    
+    if(args.length < 2){
+      System.out.println("Usage: Sparce <infile> <outfile>");
+      System.exit(1);
+    }
+    // open scanner to recive input file (in)
+    // then open the file writer (out) for making output file
+    in = new Scanner(new File(args[0]));
+    out = new PrintWriter(new FileWriter(args[1]));
+    
+    line = in.nextLine();
+    token = line.split("\\s+");
+    // paramerters for making matrix size get store in respective intergers
+    size = Integer.parseInt(token[0]); 
+    a = Integer.parseInt(token[1]); // rows in one
+    b = Integer.parseInt(token[2]); // rows in two
+    
+    one = new Matrix(size);
+    two = new Matrix(size);
+    line = in.nextLine();
+    // loop to fill instantiated matrix one
+    for( int i = 0; i < a; i++ ){
+      line = in.nextLine() + " ";
+      token = line.split("\\s+");
+      one.changeEntry(Integer.parseInt(token[0]), Integer.parseInt(token[1]), Double.parseDouble(token[2]));
+    }
+    
+    line = in.nextLine();
+    // loop to fill instantiated matrix two
+    for (int i = 0; i < b; i++) {
+      line = in.nextLine() + " ";
+      token = line.split("\\s+");
+      two.changeEntry(Integer.parseInt(token[0]), Integer.parseInt(token[1]), Double.parseDouble(token[2]));
+    }
+    
+    
+    // what will be printed into new out file given the specifications of given out files.
+    
+    /*-- Marticies to be printed -- */
+    Matrix smult = one.scalarMult(1.5);
+    Matrix add1 = one.add(two);
+    Matrix add2 = one.add(one.copy());
+    Matrix sub1 = two.sub(one);
+    Matrix sub2 = one.sub(one);
+    Matrix oneTrans = one.transpose();
+    /*---------------------------- */
+    
+    out.println("A has " + one.getNNZ() + " non-zero entries:");
+    out.println(one);
+    out.println("B has " + two.getNNZ() + " non-zero entries:");
+    out.println(two);
+    out.println("(1.5)*A =");
+    out.println(smult);
+    out.println("A+B =");
+    out.println(add1);
+    out.println("A+A =");
+    out.println(add2);
+    out.println("B-A =");
+    out.println(sub1);
+    out.println("A-A =");
+    out.println(sub2);
+    out.println("Transpose(A) =");
+    out.println(oneTrans);
+    out.println("A*B =");
+    out.println(one.mult(two));
+    out.println("B*B =");
+    out.println(two.mult(two));
+    
+    in.close();
+    out.close();
+  }
+}

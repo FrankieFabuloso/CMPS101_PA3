@@ -1,0 +1,27 @@
+* Name: Francisco Rocha
+* User ID: frocha
+* Program name: pa3
+* Source code: Professor Tantalo
+
+README:
+
+Sparse.java
+Matrix.java
+List.java
+MatrixTest.java
+ListTest.java
+Makefile
+READMESparse.java: 
+-takes in an input file and creates a file that has various matrix arithmetic calculations that are defines in Matrix.java
+
+Matrix.java:
+-Matrix ADT in which a sparse matrix is constructed in a Array of Lists.
+
+List.java:
+-List ADT that is used in Matrix.java. Changed from pa1 to be a list of Objects rather than just ints.
+
+MatrixTest.java:
+-test file for the Matrix ADT. Does all arithmetic calculations specified by program to assure that it is working properly.
+
+ListTest.java:
+-test file for List ADT. Does all manipulation and access procedures to assure that it is working correctly.
